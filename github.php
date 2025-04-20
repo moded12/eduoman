@@ -42,91 +42,199 @@ echo "<!DOCTYPE html>
 <html lang='ar' dir='rtl'>
 <head>
     <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>المعلم الإلكتروني - سلطنة عُمان</title>
+    <script async src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8177765238464378' crossorigin='anonymous'></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap');
+        :root {
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --link-color: #007bff; /* Primary blue */
+            --hover-link-color: #0056b3;
+            --item-bg: #fff;
+            --item-border: #ddd;
+            --sub-item-bg: #f8f9fa; /* Light gray */
+            --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --transition-duration: 0.3s;
+        }
 
         body {
             font-family: 'Cairo', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
-            color: #333;
+            color: var(--text-color);
             line-height: 1.6;
             text-align: center;
+            background-color: var(--bg-color);
+            transition: background-color var(--transition-duration), color var(--transition-duration);
         }
 
         .container {
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 20px auto;
             padding: 20px;
+            background-color: var(--item-bg);
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
         }
 
         h1 {
-            font-size: 24px;
-            color: #007BFF;
-            text-align: center;
-            margin-bottom: 20px;
+            font-size: 2.5rem;
+            color: var(--link-color);
+            margin-bottom: 25px;
         }
 
         .item {
-            background-color: #fff;
-            border: 1px solid #ddd;
+            background-color: var(--item-bg);
+            border: 1px solid var(--item-border);
             border-radius: 8px;
             padding: 15px;
             margin: 10px 0;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--box-shadow);
             transition: transform 0.2s, box-shadow 0.2s;
             cursor: pointer;
         }
 
         .item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .item a {
+            display: block;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: bold;
+            transition: color var(--transition-duration);
+        }
+
+        .item a:hover {
+            color: var(--link-color);
         }
 
         .sub-items {
             margin-top: 10px;
-            background-color: #f1f5f9;
+            display: none; /* Initially hidden */
+        }
+
+        .sub-items .frame {
+            display: flex;
+            justify-content: space-around; /* Evenly space the semester links */
+            gap: 15px;
+            background-color: var(--sub-item-bg);
+            padding: 12px;
             border-radius: 8px;
-            padding: 10px 15px;
-            display: none;
+            box-shadow: inset var(--box-shadow);
         }
 
         .sub-items a {
-            display: block;
-            color: #0056b3;
-            margin: 8px 0;
-            text-decoration: none;
+            display: inline-block;
+            color: var(--link-color);
             font-weight: bold;
-            transition: color 0.3s;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            background-color: #e9ecef; /* Light background for semester buttons */
+            transition: background-color var(--transition-duration), color var(--transition-duration);
         }
 
         .sub-items a:hover {
-            color: #003d80;
+            background-color: var(--hover-link-color);
+            color: #fff;
         }
 
         .back {
             display: inline-block;
-            margin-top: 20px;
-            color: #555;
+            margin-top: 25px;
+            color: var(--text-color);
             text-decoration: none;
             font-weight: bold;
-            padding: 10px 15px;
-            background-color: #e9ecef;
+            padding: 12px 20px;
+            background-color: #6c757d; /* Secondary gray */
             border-radius: 8px;
-            transition: background-color 0.3s, color 0.3s;
+            transition: background-color var(--transition-duration), color var(--transition-duration);
         }
 
         .back:hover {
-            background-color: #007BFF;
+            background-color: var(--link-color);
             color: #fff;
         }
-    </style>
+
+        .material-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--link-color);
+            font-weight: bold;
+            text-decoration: none;
+            padding: 10px 18px;
+            background-color: #d1ecf1; /* Light blue background */
+            border-radius: 5px;
+            border: 1px solid #bee5eb;
+            transition: background-color var(--transition-duration), color var(--transition-duration), border-color var(--transition-duration);
+        }
+
+        .material-link:hover {
+            background-color: var(--hover-link-color);
+            color: #fff;
+            border-color: var(--hover-link-color);
+        }
+
+        .no-content {
+            color: #dc3545; /* Danger red */
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    
+/* 🌙 Dark Mode Support */
+body.dark-mode {
+    --bg-color: #1c1c1c;
+    --text-color: #f0f0f0;
+    --link-color: #4ea8ff;
+    --hover-link-color: #82cfff;
+    --item-bg: #2b2b2b;
+    --item-border: #444;
+    --sub-item-bg: #1f1f1f;
+}
+
+</style>
+
+    <script>
+        function toggleSemesters(id) {
+            // Close all other .sub-items
+            document.querySelectorAll('.sub-items').forEach(function(item) {
+                if (item.id !== id) {
+                    item.style.display = 'none';
+                }
+            });
+
+            // Toggle the visibility of the clicked .sub-items
+            var element = document.getElementById(id);
+            if (element) {
+                element.style.display = element.style.display === 'block' ? 'none' : 'block';
+            }
+        }
+    </script>
 </head>
 <body>
 <div class='container'>
-    <h1>المعلم الإلكتروني - سلطنة عُمان</h1>";
+
+<div style='text-align:left; margin-bottom: 10px;'>
+  <button onclick='toggleTheme()' style='padding: 8px 16px; border-radius: 8px; cursor: pointer;'>🌓 الوضع الليلي</button>
+</div>
+
+    <h1>المعلم الإلكتروني - سلطنة عُمان</h1>
+    
+<!-- Google AdSense -->
+<div style='margin: 20px 0;'>
+    <ins class='adsbygoogle'
+         style='display:block; text-align:center;'
+         data-ad-client='ca-pub-8177765238464378'
+         data-ad-slot='1234567890'
+         data-ad-format='auto'
+         data-full-width-responsive='true'></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+";
 
 $base = "https://www.shneler.com/oman/api/";
 
@@ -152,18 +260,17 @@ if (isset($_GET['view_material'])) {
         $real_link = fetchMaterialAttachment($material_id);
         echo "<div class='item'><h3>$name</h3>";
         if ($real_link) {
-            echo "<a href='$real_link' target='_blank'>فتح الملف في صفحة جديدة 🔗</a>";
+            echo "<a class='material-link' href='$real_link' target='_blank'>فتح الملف في صفحة جديدة 🔗</a>";
         } else {
-            echo "<p>تعذر العثور على رابط المحتوى.</p>";
+            echo "<p class='no-content'>تعذر العثور على رابط المحتوى.</p>";
         }
         echo "</div>";
     } else {
-        echo "<p>الموضوع غير موجود.</p>";
+        echo "<p class='no-content'>الموضوع غير موجود.</p>";
     }
 
     echo "<a class='back' href='?group_id=$group_id&subject_id=$subject_id&class_id=$class_id&semester=$semester'>⬅️ رجوع</a>";
-}
-elseif (isset($_GET['group_id']) && isset($_GET['semester']) && !isset($_GET['view_material'])) {
+} elseif (isset($_GET['group_id']) && isset($_GET['semester']) && !isset($_GET['view_material'])) {
     $subject_id = $_GET['subject_id'];
     $class_id = $_GET['class_id'];
     $semester = $_GET['semester'];
@@ -179,12 +286,11 @@ elseif (isset($_GET['group_id']) && isset($_GET['semester']) && !isset($_GET['vi
             echo "<div class='item'><a href='?show_materials=$groupId&subject_id=$subject_id&class_id=$class_id&semester=$semester'>$groupName</a></div>";
         }
     } else {
-        echo "<p>لا يوجد مجموعات تعليمية</p>";
+        echo "<p class='no-content'>لا يوجد مجموعات تعليمية</p>";
     }
 
     echo "<a class='back' href='?subject_id=$subject_id&class_id=$class_id'>⬅️ رجوع</a>";
-}
-elseif (isset($_GET['show_materials'])) {
+} elseif (isset($_GET['show_materials'])) {
     $group_id = $_GET['show_materials'];
     $subject_id = $_GET['subject_id'];
     $class_id = $_GET['class_id'];
@@ -200,52 +306,56 @@ elseif (isset($_GET['show_materials'])) {
             echo "<div class='item'><a href='?view_material=$mid&group_id=$group_id&subject_id=$subject_id&class_id=$class_id&semester=$semester'>$name</a></div>";
         }
     } else {
-        echo "<p>لا يوجد مواضيع تعليمية داخل هذه المجموعة.</p>";
+        echo "<p class='no-content'>لا يوجد مواضيع تعليمية داخل هذه المجموعة.</p>";
     }
 
     echo "<a class='back' href='?group_id=$subject_id&semester=$semester&subject_id=$subject_id&class_id=$class_id'>⬅️ رجوع</a>";
-}
-elseif (isset($_GET['class_id'])) {
+} elseif (isset($_GET['class_id'])) {
     $class_id = $_GET['class_id'];
     $data = fetchData("{$base}subject.php?id=$class_id");
     $items = isset($data['apps_list']) ? $data['apps_list'] : $data;
+
     if (!empty($items)) {
         foreach ($items as $subject) {
             echo "<div class='item' onclick='toggleSemesters(\"semesters-{$subject['id']}\")'>
-                    {$subject['name']}
-                    <div id='semesters-{$subject['id']}' class='sub-items'>
-                        <a href='?group_id={$subject['id']}&semester=0'>الفصل الأول</a>
-                        <a href='?group_id={$subject['id']}&semester=1'>الفصل الثاني</a>
-                    </div>
-                  </div>";
+                        {$subject['name']}
+                        <div id='semesters-{$subject['id']}' class='sub-items'>
+                            <div class='frame'>
+                                <a href='?group_id={$subject['id']}&semester=0'>الفصل الأول</a>
+                                <a href='?group_id={$subject['id']}&semester=1'>الفصل الثاني</a>
+                            </div>
+                        </div>
+                    </div>";
         }
     } else {
-        echo "<p>لا يوجد مواد دراسية</p>";
+        echo "<p class='no-content'>لا يوجد مواد دراسية</p>";
     }
     echo "<a class='back' href='?'>⬅️ رجوع</a>";
-}
-else {
+} else {
     $data = fetchData("{$base}classes.php?id=1");
     $items = isset($data['apps_list']) ? $data['apps_list'] : $data;
+
     if (!empty($items)) {
         foreach ($items as $class) {
             echo "<div class='item'><a href='?class_id={$class['id']}'>{$class['name']}</a></div>";
         }
     } else {
-        echo "<p>لا يوجد صفوف دراسية</p>";
+        echo "<p class='no-content'>لا يوجد صفوف دراسية</p>";
     }
 }
-echo "<script>
-    function toggleSemesters(id) {
-        document.querySelectorAll('.sub-items').forEach(function(item) {
-            item.style.display = 'none';
-        });
 
-        var element = document.getElementById(id);
-        if (element) {
-            element.style.display = element.style.display === 'block' ? 'none' : 'block';
-        }
+echo "</div>
+<script>
+function toggleTheme() {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+}
+window.addEventListener('DOMContentLoaded', function() {
+    if (localStorage.getItem('theme') === 'dark') {
+        document.body.classList.add('dark-mode');
     }
-</script>";
-echo "</div></body></html>";
+});
+</script>
+
+</body></html>";
 ?>
